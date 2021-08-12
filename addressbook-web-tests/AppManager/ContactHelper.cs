@@ -40,6 +40,14 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public ContactHelper DeleteFromTable()
+        {
+            driver.FindElement(By.Id("16")).Click();
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
