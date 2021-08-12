@@ -13,10 +13,8 @@ namespace WebAddressBookTests
         [Test]
         public void ContactCreationTest()
         {
-            app.Contacts.GoToAddNewContactForm();
-            app.Contacts.FillDataToFields(new ContactData("TestFirstName", "TestLastName"));
-            app.Contacts.SubmitContactCreation();
-            app.Navigator.GoBackToHomePage();
+            ContactData contact = new ContactData("TestFirstName", "TestLastName");
+            app.Contacts.Create(contact);
         }
     }
 }
