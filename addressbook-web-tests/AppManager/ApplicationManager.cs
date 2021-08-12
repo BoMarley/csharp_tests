@@ -22,6 +22,8 @@ namespace WebAddressBookTests
 
         public ApplicationManager()
         {
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost/addressbook";
             loginHelper = new LoginHelper(driver);
             navigator = new NavigationHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
@@ -71,6 +73,5 @@ namespace WebAddressBookTests
                 return contact;
             }
         }
-}
     }
 }
