@@ -24,9 +24,43 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public ContactHelper Modify(ContactData contact)
+        {
+            EditContact();
+            FillDataToFields(contact);
+            SubmitContactModification();
+            ReturnToHomePage();
+            return this;
+        }
+
+        public ContactHelper Delete()
+        {
+            EditContact();
+            DeleteContact();
+            return this;
+        }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
+            return this;
+        }
+
+        public ContactHelper EditContact()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            return this;
+        }
+
+         public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
             return this;
         }
 
@@ -43,6 +77,11 @@ namespace WebAddressBookTests
         {
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
+        }
+
+        public void ReturnToHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
         }
     }
 }
