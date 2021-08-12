@@ -17,7 +17,7 @@ namespace WebAddressBookTests
             group.Header = "test group header";
             group.Footer = "test group footer";
 
-            app.Grouops.Create(group);
+            app.Groups.Create(group);
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace WebAddressBookTests
             group.Header = "";
             group.Footer = "";
 
-            app.Grouops.Create(group);
+            app.Groups.Create(group);
         }
     }
 }

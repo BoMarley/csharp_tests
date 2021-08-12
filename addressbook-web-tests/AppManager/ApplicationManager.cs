@@ -65,7 +65,7 @@ namespace WebAddressBookTests
             }
         }
 
-        public GroupHelper Grouops
+        public GroupHelper Groups
         {
             get
             {
