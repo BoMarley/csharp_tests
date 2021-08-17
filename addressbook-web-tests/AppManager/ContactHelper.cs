@@ -42,7 +42,7 @@ namespace WebAddressBookTests
 
         public ContactHelper DeleteFromTable()
         {
-            driver.FindElement(By.Id("16")).Click();
+            driver.FindElement(By.XPath("//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
             return this;
