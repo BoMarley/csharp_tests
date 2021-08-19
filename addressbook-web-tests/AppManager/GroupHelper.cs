@@ -61,8 +61,8 @@ namespace WebAddressBookTests
         public GroupHelper FillGroupForm(GroupData group)
         {
             Type(By.Name("group_name"), group.Name);
-            Type(By.Name("Group_header"), group.Header);
-            ype(By.Name("group_footer"), group.Footer);
+            Type(By.Name("group_header"), group.Header);
+            Type(By.Name("group_footer"), group.Footer);
             return this;
         }
 

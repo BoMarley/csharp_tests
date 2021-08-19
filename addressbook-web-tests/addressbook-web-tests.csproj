@@ -76,6 +76,7 @@
     <Compile Include="Tests\Groups\GroupRemovalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Groups\GroupCreationTests.cs" />
+    <Compile Include="Tests\TestSuitFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
