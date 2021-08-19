@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="AppManager\ApplicationManager.cs" />
     <Compile Include="AppManager\HelperBase.cs" />
+    <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="AppManager\ContactHelper.cs" />
     <Compile Include="AppManager\GroupHelper.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Tests\Contacts\ContactModifyTests.cs" />
     <Compile Include="Tests\Contacts\ContactRemovalTests.cs" />
     <Compile Include="Tests\Groups\GroupModifyTests.cs" />
+    <Compile Include="Tests\Login\LoginTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Tests\Contacts\ContactCreationTests.cs" />
     <Compile Include="Model\ContactData.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Tests\Groups\GroupRemovalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Groups\GroupCreationTests.cs" />
-    <Compile Include="Tests\TestSuitFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
