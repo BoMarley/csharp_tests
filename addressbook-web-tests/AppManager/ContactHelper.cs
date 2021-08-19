@@ -26,7 +26,7 @@ namespace WebAddressBookTests
 
         public ContactHelper Modify(ContactData contact)
         {
-            manager.Navigator.GoBackToHomePage();
+            GoToHomePage();
             EditContact();
             FillDataToFields(contact);
             SubmitContactModification();
@@ -84,6 +84,11 @@ namespace WebAddressBookTests
         {
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
+        }
+
+        public void GoToHomePage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
         }
 
         public void ReturnToHomePage()

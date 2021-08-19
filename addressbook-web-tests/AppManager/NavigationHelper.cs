@@ -21,12 +21,15 @@ namespace WebAddressBookTests
         
         public void OpenHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL);
-        }
-
-        public void GoBackToHomePage()
-        {
-            driver.FindElement(By.LinkText("home")).Click();
+            if (driver.Url == baseURL + "/addressbook/"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
+            else
+            {
+                driver.Navigate().GoToUrl(baseURL);
+            }
         }
 
         public void GoToGroupsPage()
