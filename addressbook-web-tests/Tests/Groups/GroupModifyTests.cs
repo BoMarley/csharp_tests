@@ -13,10 +13,6 @@ namespace WebAddressBookTests
         [Test]
         public void GroupModifyTest()
         {
-            //prepare
-            //to implement
-
-            //action
             GroupData group = new GroupData("modified group name");
             group.Header = null;
             group.Footer = null;

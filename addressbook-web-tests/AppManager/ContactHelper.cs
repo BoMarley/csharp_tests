@@ -21,12 +21,19 @@ namespace WebAddressBookTests
             GoToAddNewContactForm();
             FillDataToFields(contact);
             SubmitContactCreation();
+            ReturnToHomePage();
             return this;
         }
 
         public ContactHelper Modify(ContactData contact)
         {
             GoToHomePage();
+
+            if (!ContactNotExist())
+            {
+                Create(contact);
+            }
+
             EditContact();
             FillDataToFields(contact);
             SubmitContactModification();
@@ -34,25 +41,42 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public ContactHelper Delete()
+        public ContactHelper Delete(ContactData contact)
         {
+            GoToHomePage();
+
+            if (!ContactNotExist())
+            {
+                Create(contact);
+            }
+
             EditContact();
-            DeleteContact();
+            DeleteContact(contact);
             return this;
         }
 
-        public ContactHelper DeleteFromTable()
+        public ContactHelper DeleteFromTable(ContactData contact)
         {
+            if (!ContactNotExist())
+            {
+                Create(contact);
+            }
+
             driver.FindElement(By.XPath("//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
             return this;
         }
 
-        public ContactHelper DeleteContact()
+        public ContactHelper DeleteContact(ContactData contact)
         {
             driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
             return this;
+        }
+
+        private bool ContactNotExist()
+        {
+            return IsElementPresent(By.XPath("//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
         }
 
         public ContactHelper EditContact()
