@@ -13,14 +13,30 @@ namespace WebAddressBookTests
         [Test]
         public void ContactDeleteViaEditForm()
         {
+            //prepare
             ContactData contact = new ContactData("Delete", "me");
+            app.Contacts.GoToHomePage();
+            if (!app.Contacts.ContactNotExist(contact))
+            {
+                app.Contacts.Create(contact);
+            }
+
+            //actions
             app.Contacts.Delete(contact);
         }
 
         [Test]
         public void ContactDeleteFromTable()
         {
+            //prepare
             ContactData contact = new ContactData("Delete", "me");
+            app.Contacts.GoToHomePage();
+            if (!app.Contacts.ContactNotExist(contact))
+            {
+                app.Contacts.Create(contact);
+            }
+
+            //actions
             app.Contacts.DeleteFromTable(contact);
         }
     }

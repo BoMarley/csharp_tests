@@ -27,13 +27,6 @@ namespace WebAddressBookTests
 
         public ContactHelper Modify(ContactData contact)
         {
-            GoToHomePage();
-
-            if (!ContactNotExist())
-            {
-                Create(contact);
-            }
-
             EditContact();
             FillDataToFields(contact);
             SubmitContactModification();
@@ -43,13 +36,6 @@ namespace WebAddressBookTests
 
         public ContactHelper Delete(ContactData contact)
         {
-            GoToHomePage();
-
-            if (!ContactNotExist())
-            {
-                Create(contact);
-            }
-
             EditContact();
             DeleteContact(contact);
             return this;
@@ -57,11 +43,6 @@ namespace WebAddressBookTests
 
         public ContactHelper DeleteFromTable(ContactData contact)
         {
-            if (!ContactNotExist())
-            {
-                Create(contact);
-            }
-
             driver.FindElement(By.XPath("//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
@@ -74,7 +55,7 @@ namespace WebAddressBookTests
             return this;
         }
 
-        private bool ContactNotExist()
+        public bool ContactNotExist(ContactData contact)
         {
             return IsElementPresent(By.XPath("//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
         }
