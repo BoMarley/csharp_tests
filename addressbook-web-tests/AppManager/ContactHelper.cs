@@ -29,7 +29,7 @@ namespace WebAddressBookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("class.entry"));
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-child(2), td:nth-child(3)"));
             foreach (IWebElement element in elements)
             {
                 contacts.Add(new ContactData(element.Text, element.Text));;
