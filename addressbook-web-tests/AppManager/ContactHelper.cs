@@ -25,6 +25,18 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("class.entry"));
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData(element.Text, element.Text));;
+            }
+            return contacts;
+        }
+
         public ContactHelper Modify(ContactData contact)
         {
             EditContact();
@@ -37,7 +49,7 @@ namespace WebAddressBookTests
         public ContactHelper ContactsCheck(ContactData contact)
         {
             GoToHomePage();
-            if (ContactNotExist(contact))
+            if (!ContactNotExist(contact))
             {
                 Create(contact);
             }
