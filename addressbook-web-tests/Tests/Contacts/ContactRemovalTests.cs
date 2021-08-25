@@ -30,11 +30,7 @@ namespace WebAddressBookTests
         {
             //prepare
             ContactData contact = new ContactData("Delete", "me");
-            app.Contacts.GoToHomePage();
-            if (!app.Contacts.ContactNotExist(contact))
-            {
-                app.Contacts.Create(contact);
-            }
+            app.Contacts.ContactsCheck(contact);
 
             //actions
             app.Contacts.DeleteFromTable(contact);

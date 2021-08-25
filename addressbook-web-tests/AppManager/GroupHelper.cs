@@ -26,6 +26,16 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public GroupHelper GroupCheck(GroupData group)
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (!GroupNotExists())
+            {
+               Create(group);
+            }
+            return this;
+        }
+
         public List<GroupData> GetGroupList()
         {
             List<GroupData> groups = new List<GroupData>();

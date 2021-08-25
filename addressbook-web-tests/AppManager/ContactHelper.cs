@@ -34,6 +34,16 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public ContactHelper ContactsCheck(ContactData contact)
+        {
+            GoToHomePage();
+            if (ContactNotExist(contact))
+            {
+                Create(contact);
+            }
+            return this;
+        }
+
         public ContactHelper Delete(ContactData contact)
         {
             EditContact();

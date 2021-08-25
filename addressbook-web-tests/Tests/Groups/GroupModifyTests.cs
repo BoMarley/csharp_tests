@@ -17,11 +17,7 @@ namespace WebAddressBookTests
             GroupData group = new GroupData("modified group name");
             group.Header = null;
             group.Footer = null;
-            app.Navigator.GoToGroupsPage();
-            if (!app.Groups.GroupNotExists())
-            {
-                app.Groups.Create(group);
-            }
+            app.Groups.GroupCheck(group);
 
             //action
             app.Groups.Modify(1, group);
