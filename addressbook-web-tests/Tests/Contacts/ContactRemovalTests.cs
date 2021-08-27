@@ -25,7 +25,8 @@ namespace WebAddressBookTests
             //validation
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts.RemoveAt(0);
-            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
         }
 
@@ -42,7 +43,9 @@ namespace WebAddressBookTests
 
             //validation
             List<ContactData> newContacts = app.Contacts.GetContactList();
-            //oldContacts.RemoveAt(0);
+            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
         }
     }

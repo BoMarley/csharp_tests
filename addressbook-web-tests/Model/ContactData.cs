@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,19 @@ namespace WebAddressBookTests
     {
         private string firstname;
         private string lastname;
+        private IList<IWebElement> cellSurename;
+        private IList<IWebElement> cellName;
 
         public ContactData(string firstname, string lastname)
         {
             this.firstname = firstname;
-            this.lastname = lastname;
+            this.lastname = lastname;                   
+        }
+
+        public ContactData(IList<IWebElement> cellSurename, IList<IWebElement> cellName)
+        {
+            this.cellSurename = cellSurename;
+            this.cellName = cellName;
         }
 
         public bool Equals(ContactData other)

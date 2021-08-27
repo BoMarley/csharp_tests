@@ -29,10 +29,12 @@ namespace WebAddressBookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-child(2), td:nth-child(3)"));
-            foreach (IWebElement element in elements)
+            IList<IWebElement> lines = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement element in lines)
             {
-                contacts.Add(new ContactData(element.Text, element.Text));;
+                IWebElement cellSurename = element.FindElement(By.CssSelector("td:nth-of-type(2)"));
+                IWebElement cellName = element.FindElement(By.CssSelector("td:nth-of-type(3)"));
+                contacts.Add(new ContactData(cellName.Text, cellSurename.Text));
             }
             return contacts;
         }
