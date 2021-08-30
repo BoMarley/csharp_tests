@@ -36,12 +36,13 @@ namespace WebAddressBookTests
             {
                 return true;
             }
-            return firstname == other.Firstname;
+            return Firstname == other.Firstname &&
+                    Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
         {
-            return Firstname.GetHashCode();
+            return 0;
         }
 
         public override string ToString()
@@ -55,7 +56,15 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname);
+            
+            if (Lastname.Equals(other.Firstname))
+            {
+                return Firstname.CompareTo(other.Firstname);
+            }
+            else
+            {
+                return Lastname.CompareTo(other.Lastname);
+            }
         }
 
         public string Firstname
