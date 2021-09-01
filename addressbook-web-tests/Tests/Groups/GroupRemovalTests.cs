@@ -15,19 +15,23 @@ namespace WebAddressBookTests
         public void GroupRemovalTest()
         {
             //prepare
-            GroupData group = new GroupData("delete me");
-            group.Header = null;
-            group.Footer = null;
-            app.Groups.GroupCheck(group);
+            GroupData toBeRemoved = new GroupData("delete me");
+            app.Groups.GroupCheck(toBeRemoved);
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             //action
-            app.Groups.Remove(0, group);
+            app.Groups.Remove(0);
 
             //validation
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            GroupData saveToBeRemovedfForValidation = oldGroups[0];
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach(GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, saveToBeRemovedfForValidation.Id);
+            }
         }
     }
 }
