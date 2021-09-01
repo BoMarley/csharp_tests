@@ -25,20 +25,6 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public List<ContactData> GetContactList()
-        {
-            List<ContactData> contacts = new List<ContactData>();
-            GoToHomePage();
-            IList<IWebElement> lines = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in lines)
-            {
-                IWebElement cellSurename = element.FindElement(By.CssSelector("td:nth-of-type(2)"));
-                IWebElement cellName = element.FindElement(By.CssSelector("td:nth-of-type(3)"));
-                contacts.Add(new ContactData(cellName.Text, cellSurename.Text));
-            }
-            return contacts;
-        }
-
         public ContactHelper Modify(ContactData contact)
         {
             EditContact();
@@ -69,6 +55,7 @@ namespace WebAddressBookTests
         {
             driver.FindElement(By.XPath("//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             driver.SwitchTo().Alert().Accept();
             return this;
         }
@@ -76,6 +63,7 @@ namespace WebAddressBookTests
         public ContactHelper DeleteContact(ContactData contact)
         {
             driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -93,12 +81,14 @@ namespace WebAddressBookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
 
          public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -123,6 +113,26 @@ namespace WebAddressBookTests
         public void ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+        }
+
+        private List<ContactData> contactCache = null;
+
+        public List<ContactData> GetContactList()
+        {
+            if (contactCache == null)
+            {
+                contactCache = new List<ContactData>();
+                GoToHomePage();
+                IList<IWebElement> lines = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in lines)
+                {
+                    IWebElement cellSurename = element.FindElement(By.CssSelector("td:nth-of-type(2)"));
+                    IWebElement cellName = element.FindElement(By.CssSelector("td:nth-of-type(3)"));
+                    contactCache.Add(new ContactData(cellName.Text, cellSurename.Text));
+                }
+            }
+
+            return new List<ContactData>(contactCache);
         }
     }
 }
