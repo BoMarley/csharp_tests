@@ -12,7 +12,7 @@ namespace WebAddressBookTests
     public class ContactInformationTests : AuthTestBase
     {
         [Test]
-        public void TestContactInformation()
+        public void TestContactInformationEditMenu()
         {
             //prepare
             ContactData contact = new ContactData("NewName", "NewLastName");
@@ -27,6 +27,21 @@ namespace WebAddressBookTests
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
 
+        }
+
+        [Test]
+        public void TestContactInformationDetailsMenu()
+        {
+            //prepare
+            ContactData contact = new ContactData("NewName", "NewLastName");
+            app.Contacts.ContactsCheck(contact);
+
+            //actions
+            ContactData fromTable = app.Contacts.GetContactInformationFromTable(0);
+            ContactData fromDetails = app.Contacts.GetContactInformationFromDetailsMenu(0);
+
+            //validation
+            Assert.AreEqual(fromTable.AllContactDataToCompare, fromDetails.AllContactData);
         }
     }
 }

@@ -25,13 +25,15 @@ namespace WebAddressBookTests
             string lastName = cells[1].Text;
             string firstName = cells[2].Text;
             string address = cells[3].Text;
+            string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
-
+            
 
             return new ContactData(firstName, lastName)
             {
                 Address = address,
-                AllPhones = allPhones
+                AllPhones = allPhones,
+                AllEmails = allEmails
             };
         }
 
@@ -51,8 +53,27 @@ namespace WebAddressBookTests
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
-                WorkPhone = workPhone
-            };                   
+                WorkPhone = workPhone,
+                
+            };    
+        }
+
+        internal ContactData GetContactInformationFromDetailsMenu(int v)
+        {
+            manager.Navigator.OpenHomePage();
+            ContactDetails();
+            string allContactData = driver.FindElement(By.CssSelector("#content")).Text;
+
+            return new ContactData(allContactData)
+            { 
+                AllContactData = allContactData.Replace("\r\nH: ", "").Replace("M: ", "").Replace("W: ", "").Replace("\r\n\r\n", "")
+            };
+        }
+
+        public ContactHelper ContactDetails()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Details']")).Click();
+            return this;
         }
 
         public ContactHelper Create(ContactData contact)

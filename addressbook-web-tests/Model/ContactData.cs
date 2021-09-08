@@ -13,6 +13,8 @@ namespace WebAddressBookTests
         private IList<IWebElement> cellSurename;
         private IList<IWebElement> cellName;
         private string allPhones;
+        private string allEmails;
+
 
         public ContactData(string firstname, string lastname)
         {
@@ -24,6 +26,11 @@ namespace WebAddressBookTests
         {
             this.cellSurename = cellSurename;
             this.cellName = cellName;
+        }
+
+        public ContactData(string allContactData)
+        {
+            AllContactData = allContactData;
         }
 
         public bool Equals(ContactData other)
@@ -78,6 +85,40 @@ namespace WebAddressBookTests
         public string MobilePhone { get; set; }
 
         public string WorkPhone { get; set; }
+
+        public string AllContactData { get; set; }
+
+        public string AllContactDataToCompare
+        {
+            get
+            {
+                return Firstname + " " + Lastname + "\r\n" + Address + "\r\n" + AllPhones + AllEmails;
+            }
+            set
+            {
+
+            }
+
+        }
+
+        public string AllEmails
+        {
+            get {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            
+            set
+            {
+                allEmails = value;
+            }
+        }
 
         public string AllPhones { 
             get 
