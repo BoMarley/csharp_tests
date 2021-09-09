@@ -14,7 +14,7 @@ namespace WebAddressBookTests
         private IList<IWebElement> cellName;
         private string allPhones;
         private string allEmails;
-
+        private string allDataFromEditForm;
 
         public ContactData(string firstname, string lastname)
         {
@@ -86,19 +86,113 @@ namespace WebAddressBookTests
 
         public string WorkPhone { get; set; }
 
+        public string Email1 { get; set; }
+
+        public string Email2 { get; set; }
+
+        public string Email3 { get; set; }
+
         public string AllContactData { get; set; }
 
-        public string AllContactDataToCompare
+        public string AllDataFromEditForm
         {
             get
             {
-                return Firstname + " " + Lastname + "\r\n" + Address + "\r\n" + AllPhones + AllEmails;
+                if (Firstname != "")
+                {
+                    Firstname = Firstname;
+                }
+                else
+                {
+                    Firstname = "";
+                }
+
+                if (Lastname != "")
+                {
+                    Lastname = " " + Lastname;
+                }
+                else
+                {
+                    Lastname = "";
+                }
+
+                if (Address != "")
+                {
+                    Address = "\r\n" + Address;
+                }
+                else
+                {
+                    Address = "";
+                }
+
+                if (HomePhone != "")
+                {
+                    HomePhone = "\r\nH: " + HomePhone;
+                }
+                else
+                {
+                    HomePhone = "";
+                }
+
+                if (MobilePhone != "")
+                {
+                    MobilePhone = "\r\nM: " + MobilePhone;
+                }
+                else
+                {
+                    MobilePhone = "";
+                }
+
+                if (WorkPhone != "")
+                {
+                    WorkPhone = "\r\nW: " + WorkPhone;
+                }
+                else
+                {
+                    WorkPhone = "";
+                }
+
+                if (Email1 != "")
+                {
+                    Email1 = "\r\n" + Email1;
+                }
+                else
+                {
+                    Email1 = "";
+                }
+
+                if (Email2 != "")
+                {
+                    Email2 = "\r\n" + Email2;
+                }
+                else
+                {
+                    Email2 = "";
+                }
+
+                if (Email3 != "")
+                {
+                    Email3 = "\r\n" + Email3;
+                }
+                else
+                {
+                    Email3 = "";
+                }
+
+                if (allDataFromEditForm != null)
+                {
+                    return allDataFromEditForm;
+                }
+                else
+                {
+                    return allDataFromEditForm = Firstname + Lastname + Address + "\r\n" + HomePhone + MobilePhone + WorkPhone + "\r\n" + Email1 + Email2 + Email3;
+                }                          
             }
+
             set
             {
-
+                allDataFromEditForm = value;
             }
-
         }
 
         public string AllEmails
