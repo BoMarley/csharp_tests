@@ -92,6 +92,10 @@ namespace WebAddressBookTests
 
         public string Email3 { get; set; }
 
+        public string AllEmailsFromTable { get; set; }
+
+        public string AllPhonesFromTable { get; set; }
+
         public string AllContactData { get; set; }
 
         public string AllDataFromEditForm
@@ -152,6 +156,17 @@ namespace WebAddressBookTests
                     WorkPhone = "";
                 }
 
+                AllPhonesFromTable = HomePhone + MobilePhone + WorkPhone;
+
+                if (AllPhonesFromTable != "")
+                {
+                    AllPhonesFromTable = "\r\n" + AllPhonesFromTable;
+                }
+                else
+                {
+                    AllPhonesFromTable = "";
+                }
+
                 if (Email1 != "")
                 {
                     Email1 = "\r\n" + Email1;
@@ -179,13 +194,24 @@ namespace WebAddressBookTests
                     Email3 = "";
                 }
 
+                AllEmailsFromTable = Email1 + Email2 + Email3;
+
+                if (AllEmailsFromTable != "")
+                {
+                    AllEmailsFromTable = "\r\n" + AllEmailsFromTable;
+                }
+                else
+                {
+                    AllEmailsFromTable = "";
+                }
+
                 if (allDataFromEditForm != null)
                 {
                     return allDataFromEditForm;
                 }
                 else
                 {
-                    return allDataFromEditForm = Firstname + Lastname + Address + "\r\n" + HomePhone + MobilePhone + WorkPhone + "\r\n" + Email1 + Email2 + Email3;
+                    return allDataFromEditForm = Firstname + Lastname + Address + AllPhonesFromTable + AllEmailsFromTable;
                 }                          
             }
 
