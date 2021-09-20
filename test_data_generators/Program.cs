@@ -12,6 +12,7 @@ namespace test_data_generators
             StreamWriter writer = new StreamWriter(args[1]);
             for (int i = 0; i < count; i++)
             {
+                System.Console.Out.Write("\nGenerating line...");
                 writer.WriteLine(String.Format("${0},${1},${2}",
                     TestBase.GenerateRandomString(10),
                     TestBase.GenerateRandomString(10),
