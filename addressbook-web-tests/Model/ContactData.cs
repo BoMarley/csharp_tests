@@ -16,6 +16,10 @@ namespace WebAddressBookTests
         private string allEmails;
         private string allDataFromEditForm;
 
+        public ContactData()
+        {
+        }
+
         public ContactData(string firstname, string lastname)
         {
             this.Firstname = firstname;
