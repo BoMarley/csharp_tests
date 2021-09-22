@@ -63,16 +63,11 @@ namespace WebAddressBookTests
             };    
         }
 
-        internal ContactData GetContactInformationFromDetailsMenu(int v)
+        public string GetContactInformationFromDetailsMenu(int v)
         {
             manager.Navigator.OpenHomePage();
             ContactDetails();
-            string allContactData = driver.FindElement(By.CssSelector("#content")).Text;
-
-            return new ContactData(allContactData)
-            { 
-                AllContactData = allContactData
-            };
+            return driver.FindElement(By.CssSelector("#content")).Text;
         }
 
         public ContactHelper ContactDetails()

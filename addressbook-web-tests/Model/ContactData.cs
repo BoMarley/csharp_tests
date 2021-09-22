@@ -14,10 +14,13 @@ namespace WebAddressBookTests
         private IList<IWebElement> cellName;
         private string allPhones;
         private string allEmails;
-        private string allDataFromEditForm;
 
         public ContactData()
         {
+        }
+        public ContactData(string firstname)
+        {
+            this.Firstname = firstname;
         }
 
         public ContactData(string firstname, string lastname)
@@ -30,11 +33,6 @@ namespace WebAddressBookTests
         {
             this.cellSurename = cellSurename;
             this.cellName = cellName;
-        }
-
-        public ContactData(string allContactData)
-        {
-            AllContactData = allContactData;
         }
 
         public bool Equals(ContactData other)
@@ -100,144 +98,19 @@ namespace WebAddressBookTests
 
         public string AllPhonesFromTable { get; set; }
 
-        public string AllContactData { get; set; }
-
-        public string AllDataFromEditForm
+        public string AllEmails
         {
             get
             {
-                if (Firstname != "")
-                {
-                    Firstname = Firstname;
-                }
-                else
-                {
-                    Firstname = "";
-                }
-
-                if (Lastname != "")
-                {
-                    Lastname = " " + Lastname;
-                }
-                else
-                {
-                    Lastname = "";
-                }
-
-                if (Address != "")
-                {
-                    Address = "\r\n" + Address;
-                }
-                else
-                {
-                    Address = "";
-                }
-
-                if (HomePhone != "")
-                {
-                    HomePhone = "\r\nH: " + HomePhone;
-                }
-                else
-                {
-                    HomePhone = "";
-                }
-
-                if (MobilePhone != "")
-                {
-                    MobilePhone = "\r\nM: " + MobilePhone;
-                }
-                else
-                {
-                    MobilePhone = "";
-                }
-
-                if (WorkPhone != "")
-                {
-                    WorkPhone = "\r\nW: " + WorkPhone;
-                }
-                else
-                {
-                    WorkPhone = "";
-                }
-
-                AllPhonesFromTable = HomePhone + MobilePhone + WorkPhone;
-
-                if (AllPhonesFromTable != "")
-                {
-                    AllPhonesFromTable = "\r\n" + AllPhonesFromTable;
-                }
-                else
-                {
-                    AllPhonesFromTable = "";
-                }
-
-                if (Email1 != "")
-                {
-                    Email1 = "\r\n" + Email1;
-                }
-                else
-                {
-                    Email1 = "";
-                }
-
-                if (Email2 != "")
-                {
-                    Email2 = "\r\n" + Email2;
-                }
-                else
-                {
-                    Email2 = "";
-                }
-
-                if (Email3 != "")
-                {
-                    Email3 = "\r\n" + Email3;
-                }
-                else
-                {
-                    Email3 = "";
-                }
-
-                AllEmailsFromTable = Email1 + Email2 + Email3;
-
-                if (AllEmailsFromTable != "")
-                {
-                    AllEmailsFromTable = "\r\n" + AllEmailsFromTable;
-                }
-                else
-                {
-                    AllEmailsFromTable = "";
-                }
-
-                if (allDataFromEditForm != null)
-                {
-                    return allDataFromEditForm;
-                }
-                else
-                {
-                    return allDataFromEditForm = Firstname + Lastname + Address + AllPhonesFromTable + AllEmailsFromTable;
-                }                          
-            }
-
-            set
-            {
-                allDataFromEditForm = value;
-            }
-        }
-
-        public string AllEmails
-        {
-            get {
                 if (allEmails != null)
                 {
-                    return allEmails;
+                    return (string)allEmails;
                 }
                 else
                 {
-                    return "";
+                    return (CleanUp(Email1) + CleanUp(Email2) + CleanUp(Email3)).Trim();
                 }
             }
-            
             set
             {
                 allEmails = value;
@@ -260,6 +133,29 @@ namespace WebAddressBookTests
             set 
             {
                 allPhones = value;
+            }
+        }
+
+        public string AllContactData
+        {
+            get
+            {
+                string address = String.IsNullOrEmpty(Address) ? "" : "\r\n" + Address;
+                string hPhone = String.IsNullOrEmpty(HomePhone) ? "" : "\r\nH: " + HomePhone;
+                string mPhone = String.IsNullOrEmpty(MobilePhone) ? "" : "\r\nM: " + MobilePhone;
+                string wPhone = String.IsNullOrEmpty(WorkPhone) ? "" : "\r\nW: " + WorkPhone;
+                string email = String.IsNullOrEmpty(Email1) ? "" : "\r\n" + Email1;
+                string email2 = String.IsNullOrEmpty(Email2) ? "" : "\r\n" + Email2;
+                string email3 = String.IsNullOrEmpty(Email3) ? "" : "\r\n" + Email3;
+
+                string allPhones = !String.IsNullOrEmpty(wPhone) || !String.IsNullOrEmpty(hPhone) ||
+                    !String.IsNullOrEmpty(mPhone) ? "\r\n" : "";
+
+                string allEmails = !String.IsNullOrEmpty(email) || !String.IsNullOrEmpty(email2) ||
+                   !String.IsNullOrEmpty(email3) ? "\r\n" : "";
+
+                return $"{Firstname} {Lastname}{address}{allPhones}{hPhone}{mPhone}" +
+                       $"{wPhone}{allEmails}{email}{email2}{email3}";
             }
         }
 

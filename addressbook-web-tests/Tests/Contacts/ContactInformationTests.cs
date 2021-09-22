@@ -37,11 +37,11 @@ namespace WebAddressBookTests
             app.Contacts.ContactsCheck(contact);
 
             //actions
-            ContactData fromDetails = app.Contacts.GetContactInformationFromDetailsMenu(0);
-            ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);            
+            string fromDetailsMenu = app.Contacts.GetContactInformationFromDetailsMenu(0);
+            ContactData fromEditForm = app.Contacts.GetContactInformationFromEditForm(0);            
 
             //validation
-            Assert.AreEqual(fromDetails.AllContactData, fromForm.AllDataFromEditForm);
+            Assert.AreEqual(fromDetailsMenu, fromEditForm.AllContactData);
         }
     }
 }
