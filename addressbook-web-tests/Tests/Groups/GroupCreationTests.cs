@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Linq;
 
 namespace WebAddressBookTests
 {
@@ -55,5 +56,15 @@ namespace WebAddressBookTests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
+
+        [Test]
+        public void TestDBconnectivity()
+        {
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact);
+            }
+        }
+           
     }
 }
