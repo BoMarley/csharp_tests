@@ -94,10 +94,6 @@ namespace WebAddressBookTests
 
         public string Email3 { get; set; }
 
-        public string AllEmailsFromTable { get; set; }
-
-        public string AllPhonesFromTable { get; set; }
-
         public string AllEmails
         {
             get
@@ -141,21 +137,17 @@ namespace WebAddressBookTests
             get
             {
                 string address = String.IsNullOrEmpty(Address) ? "" : "\r\n" + Address;
-                string hPhone = String.IsNullOrEmpty(HomePhone) ? "" : "\r\nH: " + HomePhone;
-                string mPhone = String.IsNullOrEmpty(MobilePhone) ? "" : "\r\nM: " + MobilePhone;
-                string wPhone = String.IsNullOrEmpty(WorkPhone) ? "" : "\r\nW: " + WorkPhone;
+                string homePhone = String.IsNullOrEmpty(HomePhone) ? "" : "\r\nH: " + HomePhone;
+                string mobilePhone = String.IsNullOrEmpty(MobilePhone) ? "" : "\r\nM: " + MobilePhone;
+                string workPhone = String.IsNullOrEmpty(WorkPhone) ? "" : "\r\nW: " + WorkPhone;
                 string email = String.IsNullOrEmpty(Email1) ? "" : "\r\n" + Email1;
                 string email2 = String.IsNullOrEmpty(Email2) ? "" : "\r\n" + Email2;
                 string email3 = String.IsNullOrEmpty(Email3) ? "" : "\r\n" + Email3;
 
-                string allPhones = !String.IsNullOrEmpty(wPhone) || !String.IsNullOrEmpty(hPhone) ||
-                    !String.IsNullOrEmpty(mPhone) ? "\r\n" : "";
+                string allPhones = !String.IsNullOrEmpty(workPhone) || !String.IsNullOrEmpty(homePhone) || !String.IsNullOrEmpty(mobilePhone) ? "\r\n" : "";
+                string allEmails = !String.IsNullOrEmpty(email) || !String.IsNullOrEmpty(email2) || !String.IsNullOrEmpty(email3) ? "\r\n" : "";
 
-                string allEmails = !String.IsNullOrEmpty(email) || !String.IsNullOrEmpty(email2) ||
-                   !String.IsNullOrEmpty(email3) ? "\r\n" : "";
-
-                return $"{Firstname} {Lastname}{address}{allPhones}{hPhone}{mPhone}" +
-                       $"{wPhone}{allEmails}{email}{email2}{email3}";
+                return $"{Firstname} {Lastname}{address}{allPhones}{homePhone}{mobilePhone}{workPhone}{allEmails}{email}{email2}{email3}";
             }
         }
 
