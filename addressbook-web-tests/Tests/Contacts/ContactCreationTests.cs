@@ -43,13 +43,13 @@ namespace WebAddressBookTests
         public void ContactCreationTest(ContactData contact)
         {
             //prepare
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             //action
             app.Contacts.Create(contact);
 
             //validation
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
 
 namespace WebAddressBookTests
 {
+    [Table( Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private IList<IWebElement> cellSurename;
@@ -76,8 +78,13 @@ namespace WebAddressBookTests
             }
         }
 
+        [Column(Name = "id"), PrimaryKey]
+        public string Id { get; set; }
+
+        [Column(Name = "firstname")]
         public string Firstname { get; set; }
-        
+
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
 
         public string Address { get; set; }
@@ -91,8 +98,11 @@ namespace WebAddressBookTests
         public string Email1 { get; set; }
 
         public string Email2 { get; set; }
-
+                
         public string Email3 { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
 
         public string AllEmails
         {
@@ -158,6 +168,15 @@ namespace WebAddressBookTests
                 return "";
             }
             return Regex.Replace(phone, "[ )(-]", "") + "\r\n";
+        }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
+
         }
     }
 }

@@ -17,15 +17,17 @@ namespace WebAddressBookTests
             //prepare
             GroupData toBeRemoved = new GroupData("delete me");
             app.Groups.GroupCheck(toBeRemoved);
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             //action
             app.Groups.Remove(0);
 
             //validation
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             GroupData saveToBeRemovedfForValidation = oldGroups[0];
             oldGroups.RemoveAt(0);
+            oldGroups.Sort();
+            newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
 
             foreach(GroupData group in newGroups)

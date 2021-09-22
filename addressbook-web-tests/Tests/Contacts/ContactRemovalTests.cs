@@ -17,13 +17,13 @@ namespace WebAddressBookTests
             //prepare
             ContactData contact = new ContactData("Delete", "me");
             app.Contacts.ContactsCheck(contact);
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             //actions
             app.Contacts.Delete(contact);
 
             //validation
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.RemoveAt(0);
             oldContacts.Sort();
             newContacts.Sort();
@@ -36,13 +36,13 @@ namespace WebAddressBookTests
             //prepare
             ContactData contact = new ContactData("Delete", "me");
             app.Contacts.ContactsCheck(contact);
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             //actions
             app.Contacts.DeleteFromTable(contact);
 
             //validation
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.RemoveAt(0);
             oldContacts.Sort();
             newContacts.Sort();

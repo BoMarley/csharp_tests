@@ -17,14 +17,14 @@ namespace WebAddressBookTests
             //prepare
             GroupData modifyMe = new GroupData("modified group name");
             app.Groups.GroupCheck(modifyMe);
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0];
 
             //action
             app.Groups.Modify(0, modifyMe);
 
             //validation
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups[0].Name = modifyMe.Name;
             oldGroups.Sort();
             newGroups.Sort();

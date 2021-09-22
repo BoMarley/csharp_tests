@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Linq;
 
 namespace WebAddressBookTests
 {
@@ -43,17 +44,27 @@ namespace WebAddressBookTests
         public void GroupCreationTest(GroupData group)
         {
             //prepare
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             //action
             app.Groups.Create(group);
 
             //validation
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
+
+        [Test]
+        public void TestDBconnectivity()
+        {
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact.Deprecated);
+            }
+        }
+           
     }
 }

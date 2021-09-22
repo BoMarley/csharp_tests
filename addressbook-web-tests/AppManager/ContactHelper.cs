@@ -37,6 +37,57 @@ namespace WebAddressBookTests
             };
         }
 
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            ClearGroupFilter();  
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitEddingContactToGroup();           
+        }
+
+        internal void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            ApplyGroupFilter(group.Id);
+            SelectContact(contact.Id);
+            CommitRemovingContactfFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void ApplyGroupFilter(string groupId)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByValue(groupId);
+        }
+
+        public void CommitRemovingContactfFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        public void CommitEddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+               .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void SelectContact(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[none]");
+        }
+
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.OpenHomePage();
@@ -108,6 +159,7 @@ namespace WebAddressBookTests
         {
             EditContact();
             DeleteContact(contact);
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
             return this;
         }
 
@@ -117,6 +169,7 @@ namespace WebAddressBookTests
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             contactCache = null;
             driver.SwitchTo().Alert().Accept();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
             return this;
         }
 
