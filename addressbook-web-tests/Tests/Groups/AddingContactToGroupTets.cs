@@ -47,7 +47,7 @@ namespace WebAddressBookTests
         }
 
         [Test]
-        public void TestDeletingContactFromGroup()
+        public void DeleteContactFromGroup()
         {
             //prepare
             GroupData group = GroupData.GetAll()[0];
