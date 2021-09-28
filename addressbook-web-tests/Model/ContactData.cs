@@ -9,7 +9,7 @@ using LinqToDB.Mapping;
 
 namespace WebAddressBookTests
 {
-    [Table( Name = "addressbook")]
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private IList<IWebElement> cellSurename;
@@ -28,7 +28,7 @@ namespace WebAddressBookTests
         public ContactData(string firstname, string lastname)
         {
             this.Firstname = firstname;
-            this.Lastname = lastname;                   
+            this.Lastname = lastname;
         }
 
         public ContactData(IList<IWebElement> cellSurename, IList<IWebElement> cellName)
@@ -67,15 +67,11 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            
-            if (Lastname.Equals(other.Firstname))
+            if (Lastname == other.Lastname)
             {
                 return Firstname.CompareTo(other.Firstname);
             }
-            else
-            {
-                return Lastname.CompareTo(other.Lastname);
-            }
+            return Lastname.CompareTo(other.Lastname);
         }
 
         [Column(Name = "id"), PrimaryKey]
@@ -98,7 +94,7 @@ namespace WebAddressBookTests
         public string Email1 { get; set; }
 
         public string Email2 { get; set; }
-                
+
         public string Email3 { get; set; }
 
         [Column(Name = "deprecated")]
@@ -123,8 +119,9 @@ namespace WebAddressBookTests
             }
         }
 
-        public string AllPhones { 
-            get 
+        public string AllPhones
+        {
+            get
             {
                 if (allPhones != null)
                 {
@@ -136,7 +133,7 @@ namespace WebAddressBookTests
                 }
             }
 
-            set 
+            set
             {
                 allPhones = value;
             }

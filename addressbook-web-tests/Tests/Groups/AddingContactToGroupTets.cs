@@ -24,16 +24,13 @@ namespace WebAddressBookTests
                 app.Groups.Create(newGroup);
             }
             GroupData group = GroupData.GetAll()[0];
+            List<ContactData> oldList = group.GetContacts();
 
 
             //prepare contact without group
-            List<ContactData> oldList = group.GetContacts();
-            if (oldList.Count == 0)
-            {
-                ContactData newContact = new ContactData("New Contact");
-                app.Contacts.Create(newContact);
-            }
-            ContactData contact = ContactData.GetAll().Except(group.GetContacts()).First();
+            ContactData newContact = new ContactData("New Contact");
+            app.Contacts.Create(newContact);
+            ContactData contact = ContactData.GetAll().Last();
 
             //action
             app.Contacts.AddContactToGroup(contact, group);
@@ -45,6 +42,7 @@ namespace WebAddressBookTests
             oldList.Sort();
             Assert.AreEqual(oldList, newList);
         }
+
 
         [Test]
         public void DeleteContactFromGroup()
